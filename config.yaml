@@ -7,5 +7,5 @@ DB:
   HOST: 127.0.0.1
   USER: "john"
   PASSWORD: "secret"
-  PORT: 3306
+  PORT: "3306"
   NAME: "stamps"

@@ -21,10 +21,9 @@ func main() {
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
 	}
-	fmt.Println(viper.Get("SERVER.PORT"))
 	database.SetupDatabase()
 	user.SetupRoutes(basePath)
-	err := http.ListenAndServe(":5001", nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%v", viper.Get("SERVER.PORT")), nil)
 	if err != nil {
 		log.Fatal(err)
 	}

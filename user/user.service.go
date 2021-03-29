@@ -72,10 +72,6 @@ func handleUser(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		if user == nil {
-			w.WriteHeader(http.StatusNotFound)
-			return
-		}
 		j, err := json.Marshal(user)
 		if err != nil {
 			log.Print(err)
@@ -89,6 +85,7 @@ func handleUser(w http.ResponseWriter, r *http.Request) {
 	case http.MethodPut:
 		var user User
 		err := json.NewDecoder(r.Body).Decode(&user)
+
 		if err != nil {
 			log.Print(err)
 			w.WriteHeader(http.StatusBadRequest)
@@ -98,6 +95,7 @@ func handleUser(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+		fmt.Println(&user)
 		err = updateUser(user)
 		if err != nil {
 			log.Print(err)
